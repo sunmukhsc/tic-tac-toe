@@ -25,7 +25,6 @@ body {
 }
 
 .game-board {
-    font-size: 40px;
     display: grid;
     grid-template-columns: 150px 150px 150px;
     grid-template-rows: 150px 150px 150px;
@@ -34,15 +33,19 @@ body {
     background-color: black;
 }
 
-.game-board>div {
+.game-board>button {
+    font-family: inherit;
+    font-size: 40px;
     display: grid;
     place-items: center;
     background-color: #bae6fd;
     height: 150px;
     width: 150px;
     border-radius: 2px;
+    border: none;
 }
 
-.game-board>div:hover {
+.game-board>button:hover {
     background-color: #7dd3fc;
+    cursor: pointer;
 }
