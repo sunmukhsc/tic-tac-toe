@@ -17,13 +17,6 @@ const GameBoard = function() {
         // };
 
         const addToken = function(player, index) {
-            let availableCells = false;
-            for (let i = 0; i < 9; i++) {
-                if (board[i] === '') availableCells = true;
-            }
-
-            if (!availableCells) return;
-
             board[index] = player.token;
 
             // render();
@@ -54,6 +47,7 @@ const GameController =  (function () {
 
     const board = GameBoard();
 
+    const playerTurnDiv = document.querySelector('.turn');
     const squares = [];
     const gameBoardDiv = document.querySelector('.game-board');
     for (let i = 0; i < 9; i++) {
@@ -61,6 +55,7 @@ const GameController =  (function () {
     }
 
     let activePlayer = players[0];
+    let gameOver = false;
 
     const switchPlayerTurn = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
@@ -69,9 +64,35 @@ const GameController =  (function () {
     const getActivePlayer = () => activePlayer;
 
     const playRound = (index) => {
-        board.addToken(getActivePlayer(), index);
+        let availableCells = false;
+        if (board.getBoard()[index] === '') availableCells = true;
 
-        switchPlayerTurn();
+        if(availableCells) {
+            board.addToken(getActivePlayer(), index);
+
+            const currentBoard = board.getBoard();
+            if (currentBoard[0]!== '' && currentBoard[0]===currentBoard[1] && currentBoard[0]===currentBoard[2] ||
+                currentBoard[3]!== '' && currentBoard[3]===currentBoard[4] && currentBoard[3]===currentBoard[5] ||
+                currentBoard[6]!== '' && currentBoard[6]===currentBoard[7] && currentBoard[6]===currentBoard[8] ||
+                currentBoard[0]!== '' && currentBoard[0]===currentBoard[3] && currentBoard[0]===currentBoard[6] ||
+                currentBoard[1]!== '' && currentBoard[1]===currentBoard[4] && currentBoard[1]===currentBoard[7] ||
+                currentBoard[2]!== '' && currentBoard[2]===currentBoard[5] && currentBoard[2]===currentBoard[8] ||
+                currentBoard[0]!== '' && currentBoard[0]===currentBoard[4] && currentBoard[0]===currentBoard[8] ||
+                currentBoard[2]!== '' && currentBoard[2]===currentBoard[4] && currentBoard[2]===currentBoard[6])  {
+                    displaySquares();
+                    playerTurnDiv.textContent = `${activePlayer.name} Wins!`;
+                    gameOver = true;
+                    return;
+            }
+
+            switchPlayerTurn();
+            displaySquares();
+            showTurn();
+        }
+
+        
+
+        
     }
 
     const displaySquares = function() {
@@ -80,11 +101,15 @@ const GameController =  (function () {
         }
     }
 
+    const showTurn = function() {
+        playerTurnDiv.textContent = `${activePlayer.name}'s Turn`;
+    }
+
     const clickHandler = function(e) {
+        if (gameOver) return;
         const clickedId = e.target.id;
         const index = clickedId[7];
         playRound(index);
-        displaySquares();
     }
 
     for (let i = 0; i < 9; i++) {
@@ -92,4 +117,5 @@ const GameController =  (function () {
     }
 
     displaySquares();
+    showTurn();
 })()
