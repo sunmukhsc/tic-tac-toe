@@ -59,14 +59,14 @@ const GameController =  (function () {
 
 
     const playRound = (index) => {
-        let availableCells = false;
-        const currentBoard = board.getBoard();
-        if (currentBoard[index] === '') availableCells = true;
+        let isAvailable = false;
+        let currentBoard = board.getBoard();
+        if (currentBoard[index] === '') isAvailable = true;
 
-        if(availableCells) {
+        if(isAvailable) {
             board.addToken(getActivePlayer(), index);
+            currentBoard = board.getBoard();
 
-            
             if (currentBoard[0]!== '' && currentBoard[0]===currentBoard[1] && currentBoard[0]===currentBoard[2] ||
                 currentBoard[3]!== '' && currentBoard[3]===currentBoard[4] && currentBoard[3]===currentBoard[5] ||
                 currentBoard[6]!== '' && currentBoard[6]===currentBoard[7] && currentBoard[6]===currentBoard[8] ||
@@ -82,6 +82,24 @@ const GameController =  (function () {
                     winningDialog.showModal();
                     return;
             }
+            
+            let availableCells = false;
+            for (let i = 0; i < 9; i++) {
+                if (currentBoard[i] === ''){
+                    availableCells = true;
+                    break;
+                }
+            }
+
+            if (!availableCells) {
+                displaySquares();
+                playerTurnDiv.textContent = `Tie Game!`;
+                gameOver = true;
+                winner.textContent = `Tie Game!`;
+                winningDialog.showModal();
+                return;
+            }
+
             switchPlayerTurn();
             displaySquares();
             showTurn();
