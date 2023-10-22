@@ -33,14 +33,20 @@ const GameController =  (function () {
     const board = GameBoard();
 
     const playerTurnDiv = document.querySelector('.turn');
-    const resetBtn = document.querySelector('.reset')
-    const winningDialog = document.querySelector('#winning-dialog');
-    const playAgainBtn = document.querySelector('.play-again');
+    const resetBtn = document.querySelector('.reset');
     const winner = document.querySelector('.winner')
     const squares = [];
     for (let i = 0; i < 9; i++) {
         squares[i] = document.querySelector(`#square-${i}`);
     }
+    const winningDialog = document.querySelector('#winning-dialog');
+    const playAgainBtn = document.querySelector('.play-again');
+    const namesDialog = document.querySelector('#names-dialog');
+    const confirmBtn = namesDialog.querySelector('#confirmBtn');
+    const customNamesBtn = document.querySelector('.custom-names');
+    const playerInput1 = namesDialog.querySelector('#player1-name');
+    const playerInput2 = namesDialog.querySelector('#player2-name');
+    
 
     let activePlayer = players[0];
     let gameOver = false;
@@ -117,8 +123,33 @@ const GameController =  (function () {
         resetGame();
     }
 
-    resetBtn.addEventListener('click', resetGame);
+    const setPlayerNames = function() {
+        players[0].name = playerInput1.value;
+        players[1].name = playerInput2.value;
+    }
+
+    resetBtn.addEventListener('click', () => {
+        players[0].name = "Player 1";
+        players[1].name = "Player 2";
+        resetGame();
+    });
+
     playAgainBtn.addEventListener('click', playAgain);
+    customNamesBtn.addEventListener('click', () => {
+        namesDialog.showModal();
+    });
+    namesDialog.addEventListener("cancel", (event) => {})
+    confirmBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        confirmBtn.value = "default";
+        namesDialog.close(confirmBtn.value);
+    })
+    namesDialog.addEventListener("close", (e) => {
+        if (namesDialog.returnValue !== 'cancel') {
+          setPlayerNames();
+          resetGame();
+        }
+      });
 
     displaySquares();
     showTurn();

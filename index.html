@@ -22,13 +22,34 @@
             <button id="square-7"></button>
             <button id="square-8"></button>
         </div>
-        <div class="buttons"><button class="reset">Reset Game</button></div>
+        <div class="buttons">
+            <button class="reset">Reset Game</button>
+            <button class="custom-names">Enter Player Names</button>
+        </div>
     </div>
     <dialog id="winning-dialog">
         <div class="dialog-container">
             <h2 class="winner"></h2>
             <button class="play-again">Play Again</button>
         </div>
+    </dialog>
+    <dialog id="names-dialog">
+        <form action="" method="post">
+            <h2 class="names-heading">Enter Player Names</h2>
+            <div class="input-row">
+                <label for="player1-name">Player 1:</label>
+                <input type="text" id="player1-name" name="player1-name">
+            </div>
+            <div class="input-row">
+                <label for="player2-name">Player 2:</label>
+                <input type="text" id="player2-name" name="player2-name">
+            </div>
+
+            <div class="names-buttons">
+                <button value="cancel" formmethod="dialog">Cancel</button>
+                <button id="confirmBtn" value="default">Confirm</button>
+            </div>
+        </form>
     </dialog>
 </body>
 </html>
