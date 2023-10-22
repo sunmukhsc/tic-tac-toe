@@ -1,26 +1,28 @@
 body {
-    background-color: #e0f2fe;
+    /* background-color: #e0f2fe; */
+    background-color: #bae6fd;
     display: grid;
-    place-items: center;
-    padding: 100px;
+    justify-items: center;
+    padding: 20px;
     font-family:  sans-serif;
 }
 
 .container {
-    background-color: #bae6fd;
+    /* background-color: #bae6fd; */
     padding: 20px;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 70px 50px 500px;
+    grid-template-rows: 70px 50px 500px 70px;
     justify-items: center;
     align-items: center;
-    row-gap: 20px;
+    row-gap: 50px;
     width: 700px;
-    height: 700px;
+    height: 1000px;
     border-radius: 40px;
 }
 
 .header {
+    font-size: 50px;
     color: #0c4a6e;
     padding-bottom: 10px;
 }
@@ -53,5 +55,24 @@ body {
 
 .game-board>button:hover {
     background-color: #7dd3fc;
+    cursor: pointer;
+}
+
+.buttons {
+    padding-top: 50px;
+}
+
+button.reset {
+    background-color: #7dd3fc;
+    border: none;
+    font-family: inherit;
+    font-size: 20px;
+    width:200px;
+    height: 70px;
+    border-radius: 12px;
+}
+
+button.reset:hover {
+    background-color: #0ea5e9;
     cursor: pointer;
 }

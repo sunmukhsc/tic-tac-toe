@@ -4,36 +4,21 @@ const GameBoard = function() {
                         '', '', '',
                         '', '', ''];
 
-        // const init = function() {
-        //     cacheDom();
-        //     render();
-        // };
-
-        // const cacheDom = function() {
-        //     this.gameBoardDiv = document.querySelector('.game-board');
-        //     for (let i = 0; i < 9; i++) {
-        //         this[`square${i}`] = document.querySelector(`#square-${i}`);
-        //     }
-        // };
-
         const addToken = function(player, index) {
             board[index] = player.token;
-
-            // render();
         };
-
-        // const render = function() {
-        //     for (let i = 0; i < 9; i++) {
-        //         this[`square${i}`].textContent = board[i];
-        //     }
-        // };
 
         const getBoard = function() {
             return board;
         }
 
-    //init();
-    return {getBoard, addToken};
+        const resetBoard = function() {
+            for (let i = 0; i < 9; i++) {
+                board[i] = '';
+            }
+        }
+
+    return {getBoard, addToken, resetBoard};
 }
 
 function createPlayer(name, token) {
@@ -48,8 +33,10 @@ const GameController =  (function () {
     const board = GameBoard();
 
     const playerTurnDiv = document.querySelector('.turn');
+    const resetBtn = document.querySelector('.reset')
+    const winningDialog = document.querySelector('#winning-dialog');
+    const winner = document.querySelector('.winner')
     const squares = [];
-    const gameBoardDiv = document.querySelector('.game-board');
     for (let i = 0; i < 9; i++) {
         squares[i] = document.querySelector(`#square-${i}`);
     }
@@ -63,14 +50,16 @@ const GameController =  (function () {
 
     const getActivePlayer = () => activePlayer;
 
+
     const playRound = (index) => {
         let availableCells = false;
-        if (board.getBoard()[index] === '') availableCells = true;
+        const currentBoard = board.getBoard();
+        if (currentBoard[index] === '') availableCells = true;
 
         if(availableCells) {
             board.addToken(getActivePlayer(), index);
 
-            const currentBoard = board.getBoard();
+            
             if (currentBoard[0]!== '' && currentBoard[0]===currentBoard[1] && currentBoard[0]===currentBoard[2] ||
                 currentBoard[3]!== '' && currentBoard[3]===currentBoard[4] && currentBoard[3]===currentBoard[5] ||
                 currentBoard[6]!== '' && currentBoard[6]===currentBoard[7] && currentBoard[6]===currentBoard[8] ||
@@ -82,18 +71,16 @@ const GameController =  (function () {
                     displaySquares();
                     playerTurnDiv.textContent = `${activePlayer.name} Wins!`;
                     gameOver = true;
+                    winner.textContent = `${activePlayer.name} Wins!`;
+                    winningDialog.showModal();
                     return;
             }
-
             switchPlayerTurn();
             displaySquares();
             showTurn();
-        }
-
-        
-
-        
+        }        
     }
+
 
     const displaySquares = function() {
         for (let i = 0; i < 9; i++) {
@@ -115,6 +102,16 @@ const GameController =  (function () {
     for (let i = 0; i < 9; i++) {
         squares[i].addEventListener('click', clickHandler);
     }
+
+    const resetGame = function() {
+        board.resetBoard();
+        activePlayer = players[0];
+        gameOver = false;
+        displaySquares();
+        showTurn();
+    }
+
+    resetBtn.addEventListener('click', resetGame);
 
     displaySquares();
     showTurn();
