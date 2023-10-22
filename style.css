@@ -4,7 +4,7 @@ body {
     display: grid;
     justify-items: center;
     padding: 20px;
-    font-family:  sans-serif;
+    font-family:  'Roboto', sans-serif;
 }
 
 .container {
@@ -54,7 +54,7 @@ body {
 }
 
 .game-board>button:hover {
-    background-color: #7dd3fc;
+    background-color: #a5e2ff;
     cursor: pointer;
 }
 
@@ -73,6 +73,47 @@ button.reset {
 }
 
 button.reset:hover {
-    background-color: #0ea5e9;
+    background-color: #38bdf8;
+    cursor: pointer;
+}
+
+ #winning-dialog {
+    width: 400px;
+    height: 300px;
+    /* border:10px solid #082f49; */
+    border: none;
+    border-radius: 20px;
+    color: #0284c7;
+    background-color: #e0f2fe;
+ }
+
+ #winning-dialog::backdrop {
+    backdrop-filter: blur(2px);
+}
+
+.dialog-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+  } 
+
+.winner {
+    font-size: 40px;
+}
+
+button.play-again {
+    background-color: #7dd3fc;
+    border: none;
+    font-family: inherit;
+    font-size: 20px;
+    width:200px;
+    height: 70px;
+    border-radius: 12px;
+}
+
+button.play-again:hover {
+    background-color: #38bdf8;
     cursor: pointer;
 }
