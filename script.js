@@ -35,6 +35,7 @@ const GameController =  (function () {
     const playerTurnDiv = document.querySelector('.turn');
     const resetBtn = document.querySelector('.reset')
     const winningDialog = document.querySelector('#winning-dialog');
+    const playAgainBtn = document.querySelector('.play-again');
     const winner = document.querySelector('.winner')
     const squares = [];
     for (let i = 0; i < 9; i++) {
@@ -111,7 +112,13 @@ const GameController =  (function () {
         showTurn();
     }
 
+    const playAgain = function() {
+        winningDialog.close();
+        resetGame();
+    }
+
     resetBtn.addEventListener('click', resetGame);
+    playAgainBtn.addEventListener('click', playAgain);
 
     displaySquares();
     showTurn();
