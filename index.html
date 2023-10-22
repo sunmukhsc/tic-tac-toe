@@ -23,14 +23,14 @@
             <button id="square-8"></button>
         </div>
         <div class="buttons">
-            <button class="reset">Reset Game</button>
-            <button class="custom-names">Enter Player Names</button>
+            <button class="visible-button" id="reset">Reset Game</button>
+            <button class="visible-button" id="custom-names">Enter Player Names</button>
         </div>
     </div>
     <dialog id="winning-dialog">
         <div class="dialog-container">
             <h2 class="winner"></h2>
-            <button class="play-again">Play Again</button>
+            <button class="visible-button" id="play-again">Play Again</button>
         </div>
     </dialog>
     <dialog id="names-dialog">
@@ -46,8 +46,8 @@
             </div>
 
             <div class="names-buttons">
-                <button value="cancel" formmethod="dialog">Cancel</button>
-                <button id="confirmBtn" value="default">Confirm</button>
+                <button class="visible-button" value="cancel" formmethod="dialog">Cancel</button>
+                <button class="visible-button" id="confirmBtn" value="default">Confirm</button>
             </div>
         </form>
     </dialog>

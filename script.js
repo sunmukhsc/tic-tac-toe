@@ -33,17 +33,17 @@ const GameController =  (function () {
     const board = GameBoard();
 
     const playerTurnDiv = document.querySelector('.turn');
-    const resetBtn = document.querySelector('.reset');
+    const resetBtn = document.querySelector('#reset');
     const winner = document.querySelector('.winner')
     const squares = [];
     for (let i = 0; i < 9; i++) {
         squares[i] = document.querySelector(`#square-${i}`);
     }
     const winningDialog = document.querySelector('#winning-dialog');
-    const playAgainBtn = document.querySelector('.play-again');
+    const playAgainBtn = document.querySelector('#play-again');
     const namesDialog = document.querySelector('#names-dialog');
     const confirmBtn = namesDialog.querySelector('#confirmBtn');
-    const customNamesBtn = document.querySelector('.custom-names');
+    const customNamesBtn = document.querySelector('#custom-names');
     const playerInput1 = namesDialog.querySelector('#player1-name');
     const playerInput2 = namesDialog.querySelector('#player2-name');
     
